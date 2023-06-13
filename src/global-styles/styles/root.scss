@@ -1,0 +1,17 @@
+/// Root Styles file
+/// Here we define all the root variables we need for our project.
+/// For examples see Material Design color system: https://m2.material.io/design/color/the-color-system.html
+
+:root {
+    --color-primary: #5721f2;
+    --color-on-surface: #000;
+    --black-color: #000000;
+    --black-color-grad: rgba(0, 0, 0, 0.6);
+    --grey-grade1: #D5D5D5;
+    --grey-grade2: #ECECEC;
+    --white-color: #FFFFFF;
+    --blue-color: #3C79F5;
+    //background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), linear-gradient(0deg, #CECECE, #CECECE);
+    //--black-color-grad: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), linear-gradient(0deg, #CECECE, #CECECE);
+
+}

@@ -1,0 +1,37 @@
+.form-input-container {
+    display: grid;
+    grid-template-columns: 50px auto;
+    padding: 3.2rem 3.2rem 5rem;
+    background-color: var(--white-color);
+    gap: 1.6rem;
+    border-radius: 1.6rem;
+    border: 1px solid transparent;
+
+    &:hover, &:focus-within {
+        border: 1px solid var(--black-color-grad);
+    }
+
+    &__image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &__input {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        border: none;
+        font-size: 1.6rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

@@ -24,3 +24,9 @@ body {
 p {
   color: var(--color-on-surface);
 }
+
+.layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

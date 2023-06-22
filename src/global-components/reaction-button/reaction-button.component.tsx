@@ -5,7 +5,7 @@ import './reaction-button.styles.scss'
 
 type ReactionButtonProp = {
     Icon: IconType;
-    text: string;
+    text: number;
 };
 
 const ReactionButton:React.FC<ReactionButtonProp> = ({Icon, text}) => {

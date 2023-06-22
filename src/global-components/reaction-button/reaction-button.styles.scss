@@ -2,6 +2,7 @@
     display: flex;
     gap: .8rem;
     color: var(--black-color-grad);
+    cursor: pointer;
 
     & &__svg {
         font-size: 1.6rem;

@@ -5,6 +5,7 @@
     padding: 3.2rem;
     background-color: var(--white-color);
     border-radius: 2rem;
+    //border: 1px solid red;
 
     & &__image {
         width: 4.8rem;
@@ -46,6 +47,8 @@
         p {
             font-size: 1.6rem;
             color: var(--black-color-grad);
+            line-height: 2.08rem;
+            white-space: pre-wrap;
         }
     }
 
@@ -68,10 +71,59 @@
     & &__reply {
         display: flex;
         gap: .8rem;
+        cursor: pointer;
 
         span {
             color: var(--black-color-grad);
             font-size: 1.4rem;
         }
     }
+
+    & &__more {
+        position: relative;
+
+        img {
+            cursor: pointer;
+        }
+    }
+
+    & &__more-options {
+        display: none;
+        position: absolute;
+        padding: 2.4rem;
+        gap: 1.8rem;
+        right: 0;
+        border: 1px solid var(--grey-grade1);
+        background-color: var(--white-color);
+        border-radius: 1.2rem;
+
+        &--show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        p {
+            display: flex;
+            font-size: 1.4rem;
+            gap: 1rem;
+            align-items: start;
+            color: var(--black-color-grad);
+            cursor: pointer;
+
+            &:hover {
+                color: var(--blue-color);
+            }
+        }
+    }
+    
+}
+
+.reply-comments {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5.5rem;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+    padding-left: 3.9rem;
+    border-left: 2px solid var(--grey-grade1);
 }

@@ -1,12 +1,10 @@
 import React from 'react';
-import FormInput from './global-components/form-input/form-input.component';
-import Comment from './global-components/comment/comment.component';
+import FullComments from './global-components/full-comments/full-comments.component';
+
 
 const App: React.FC = () => (
-  <div>
-    <h1>Helllo</h1>
-    <FormInput />
-    <Comment />
+  <div className='layout'>
+    <FullComments />
   </div>
 );
 

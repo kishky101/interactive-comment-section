@@ -16,6 +16,7 @@
 
     & &__sort {
         position: relative;
+        cursor: pointer;
     }
 
     & &__dropdown {
@@ -30,6 +31,7 @@
         label {
             font-size: 1.4rem;
             color: var(--black-color);
+            cursor: pointer;
         }
     }
 
@@ -46,6 +48,7 @@
 
         &--show {
             display: block;
+            z-index: 1;
         }
 
         label {

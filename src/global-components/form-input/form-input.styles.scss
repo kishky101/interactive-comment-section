@@ -7,6 +7,7 @@
     border-radius: 1.6rem;
     border: 1px solid transparent;
     transition: all .5s;
+    margin-top: 1rem;
 
     &:hover, &:focus-within {
         border: 1px solid var(--black-color-grad);
@@ -24,12 +25,18 @@
         }
     }
 
+    & &__form {
+        display: flex;
+        //flex-direction: column;
+    }
+
     & &__input {
         display: block;
         max-width: 100%;
         width: 100%;
         border: none;
         font-size: 1.6rem;
+        //overflow-x: scroll;
 
         &:focus {
             outline: none;

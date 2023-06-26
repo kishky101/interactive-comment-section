@@ -3,7 +3,7 @@ import { MockDataType } from "@/mock-comment-data";
 
 
 const addComment = (comments: MockDataType[], comment: MockDataType): MockDataType[] => {
-    return [...comments, comment]
+    return [ comment,...comments ]
 }
 
 const deleteComment = (comments: MockDataType[], comment: MockDataType): MockDataType[] => {
@@ -20,9 +20,31 @@ const updateComment = (comments: MockDataType[], text: string, commentId: number
     })
 }
 
+const likeComment = (comments: MockDataType[], commentId: number) => {
+    return [...comments].map(comment => {
+        if (comment.id === commentId) {
+            if (comment.liked === false) {
+                return {...comment,likeCount: comment.likeCount + 1, liked: true }
+            }else {
+                return {...comment,likeCount: comment.likeCount - 1, liked: false }
+            }
+            
+        }else {
+            return comment
+        }
+    })
+}
+
+const sortWithBestComments = (comments: MockDataType[]) => {
+    return [...comments].sort((a, b) => b.likeCount - a.likeCount)
+}
+
+const sortWithLatestComments = (comments: MockDataType[]) => {
+    return [...comments]
+}
+
 export type CommentState = {
     readonly user: string;
-    readonly userLike: boolean;
     readonly commentSort: string;
     readonly isLoading: boolean;
     readonly comments: MockDataType[];
@@ -30,7 +52,6 @@ export type CommentState = {
 
 const INITIAL_STATE: CommentState = {
     user: '',
-    userLike: false,
     commentSort: '',
     isLoading: false,
     comments: []
@@ -43,38 +64,33 @@ export const commentSlice = createSlice({
         setComments(state, action) {
             state.comments = action.payload
         },
-        // addNewComment: {
-        //     reducer: (state, action: PayloadAction<MockDataType>) => {
-        //         state.comments = addComment(state.comments, action.payload)
-        //     },
-        //     prepare: () => {
-        //         return {payload: ''}
-        //     }
-        // },
         addNewComment(state, action) {
             state.comments = addComment(state.comments, action.payload)
         },
-        // addNewComment(state, action) {
-        //     state.comments.push(action.payload)
-        // },
         removeComment(state, action) {
             state.comments = deleteComment(state.comments, action.payload)
         },
+        mostLikeCommentSort(state) {
+            state.comments = sortWithBestComments(state.comments)
+        },
+        latestCommentSort(state) {
+            state.comments = sortWithLatestComments(state.comments)
+        },
         editComment(state, action) {
             state.comments = updateComment(state.comments, action.payload.text, action.payload.id)
-        },
-        likedByUser(state, action) {
-            state.userLike = action.payload
         },
         setCurrentUser(state, action) {
             state.user = action.payload
         },
         setSortMode(state, action) {
             state.commentSort = action.payload
+        },
+        setCommentLike(state, action) {
+            state.comments = likeComment(state.comments, action.payload)
         }
     }
 })
 
 export const CommentReducer = commentSlice.reducer;
 
-export const {addNewComment, removeComment,editComment, likedByUser, setComments, setCurrentUser, setSortMode} = commentSlice.actions;
+export const {addNewComment, removeComment, mostLikeCommentSort, latestCommentSort,  editComment, setComments, setCurrentUser, setSortMode, setCommentLike} = commentSlice.actions;

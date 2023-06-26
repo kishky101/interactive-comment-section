@@ -19,14 +19,14 @@ export const selectLastId = createSelector([selectComments],
     }
 )
 
-export const selectLike = createSelector([selectReducer], 
-    (Comment) => Comment.userLike
-)
-
 export const selectSort = createSelector([selectReducer], 
     (comment) => comment.commentSort
 )
 
 export const selectCurrentUser = createSelector([selectReducer], 
     (comment) => comment.user
+)
+
+export const selectTotalComment = createSelector([selectComments], 
+   (comment) =>  2034 + comment.length
 )

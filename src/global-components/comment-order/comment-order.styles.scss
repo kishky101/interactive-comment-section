@@ -55,6 +55,8 @@
             display: block;
             white-space: nowrap;
             color: var(--black-color-grad);
+            //border: 1px solid red;
+            cursor: pointer;
 
             &:first-of-type {
                 margin-bottom: 1.8rem;

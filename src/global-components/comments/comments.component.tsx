@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Comment from '../comment/comment.component';
 import MockData from '@/mock-comment-data';
-import { MockDataType } from '@/mock-comment-data';
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
+import {useSelector } from 'react-redux/es/hooks/useSelector';
 import { useAppDispatch } from '@/store/store';
 import { selectComments } from '@/store/selector';
 import { setComments } from '@/store/reducer';

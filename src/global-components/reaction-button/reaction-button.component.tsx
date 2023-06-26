@@ -6,12 +6,13 @@ import './reaction-button.styles.scss'
 type ReactionButtonProp = {
     Icon: IconType;
     text: number;
+    isLiked: boolean;
 };
 
-const ReactionButton:React.FC<ReactionButtonProp> = ({Icon, text}) => {
+const ReactionButton:React.FC<ReactionButtonProp> = ({Icon, text, isLiked}) => {
 
     return (
-        <div className='icon'>
+        <div className='icon' style={{color: `${isLiked? '': 'var(--black-color-grad)'}`}}>
             <Icon className='icon__svg'/>
             <span>{text}</span>
         </div>

@@ -7,7 +7,7 @@ import ReactionButton from "../reaction-button/reaction-button.component";
 import {FaHeart, FaRegHeart, FaEdit, FaTrashAlt} from 'react-icons/fa';
 import reply from '../../assets/images/reply.svg'
 import { MockDataType } from "@/mock-comment-data";
-import { addNewComment, removeComment, editComment } from "@/store/reducer";
+import { addNewComment, removeComment, editComment, setCommentLike } from "@/store/reducer";
 import { useAppDispatch } from "@/store/store";
 import FormInput from "../form-input/form-input.component";
 import { commentCreator } from "@/utils/utils";
@@ -26,16 +26,19 @@ type CommentProps = {
 }
 
 const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeComment, setActiveComment}) => {
-    const {id, name, comment, time, likeCount,} = comentObj;
+    const {id, name, comment, time, likeCount, liked} = comentObj;
     const dispatch = useAppDispatch();
 
     const lastId: number = useSelector(selectLastId);
 
     const user = useSelector(selectCurrentUser);
+
     const [open, setOpen] = useState(false);
+
 
     const isReplying = activeComment && activeComment.type === 'replying' && activeComment.id === comentObj.id;
     const isEditing = activeComment && activeComment.type === 'editing' && activeComment.id === comentObj.id;
+   
     const onClickHandler = () => setOpen(!open);
 
     const deleteHandler = () => {
@@ -46,12 +49,12 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
         setActiveComment({id: comentObj.id, type: 'replying'})
         toggleReplying()
     }
+    
     const editHandler = () => setActiveComment({id: comentObj.id, type: 'editing'})
 
     const addComment = (text: string) => {
         console.log('add', text)
-        const newComment = commentCreator(lastId + 1, user, text, '2 min', comentObj.parentId? comentObj.parentId: comentObj.id)
-        console.log(newComment)
+        const newComment = commentCreator(lastId + 1, user, text, comentObj.parentId? comentObj.parentId: comentObj.id)
         dispatch(addNewComment(newComment));
         setActiveComment({id: comentObj.id, type: ''})
         return text;
@@ -68,6 +71,9 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
         setActiveComment({id: comentObj.id, type: ''})
     }
 
+    const likeToggle = () => dispatch(setCommentLike(id));
+
+
     return (
         <div>
             {!isEditing && <div className="comment">
@@ -83,7 +89,9 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
                         <p>{comment}</p>
                     </div>}
                     <div className="comment__footer">
-                        <ReactionButton Icon={FaRegHeart} text={likeCount} />
+                        <div onClick={likeToggle}>
+                            <ReactionButton Icon={liked? FaHeart :FaRegHeart} text={likeCount} isLiked={liked} />
+                        </div>
                         <div className="comment__reply" onClick={replyHandler}>
                             <img src={reply} />
                             <span>Reply</span>

@@ -12,7 +12,7 @@ type ReactionButtonProp = {
 const ReactionButton:React.FC<ReactionButtonProp> = ({Icon, text, isLiked}) => {
 
     return (
-        <div className='icon' style={{color: `${isLiked? '': 'var(--black-color-grad)'}`}}>
+        <div className='icon' style={{color: `${isLiked? 'var(--blue-color)': 'var(--black-color-grad)'}`}}>
             <Icon className='icon__svg'/>
             <span>{text}</span>
         </div>

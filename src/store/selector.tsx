@@ -28,5 +28,5 @@ export const selectCurrentUser = createSelector([selectReducer],
 )
 
 export const selectTotalComment = createSelector([selectComments], 
-   (comment) =>  2034 + comment.length
+   (comment) =>  2304 + comment.length
 )

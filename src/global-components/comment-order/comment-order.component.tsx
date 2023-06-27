@@ -14,8 +14,14 @@ const CommentOrder:React.FC = () => {
 
     const onClickHandler = () => setOpen(!open);
 
-    const bestCommentClickHandler = () => dispatch(mostLikeCommentSort())
-    const latestCommentClickHandler = () => dispatch(latestCommentSort())
+    const bestCommentClickHandler = () => {
+        dispatch(mostLikeCommentSort())
+        setOpen(false)
+    }
+    const latestCommentClickHandler = () => {
+        dispatch(latestCommentSort())
+        setOpen(false)
+    }
 
     return (
         <div className="comment-order">
@@ -25,7 +31,7 @@ const CommentOrder:React.FC = () => {
             <div className="comment-order__sort">
                 <div className="comment-order__dropdown" onClick={onClickHandler}>
                     <label htmlFor="sort">Sort by</label>
-                    <img src={arrow} alt="down arrow" />
+                    <img src={arrow} alt="down arrow" className={`comment-order__arrow ${open ? "comment-order__arrow--show" : ""}`}/>
                 </div>
                 <div className={`comment-order__options ${open ? "comment-order__options--show" : ""}`}> 
                     <label htmlFor="sort-best" onClick={bestCommentClickHandler}>

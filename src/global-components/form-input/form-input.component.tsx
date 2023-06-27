@@ -35,7 +35,7 @@ const FormInput: React.FC<FormInputProps> = ({submitHandler, initialVal = '', ha
             </div>
             <form onSubmit={onSubmitHandler} className="form-input-container__form">
                 <input placeholder="Add comment..." className="form-input-container__input" name="commentText" value={comment} onChange={onChangeHandler}/>
-                {/* <button>submit</button> */}
+                {/* <button>post</button> */}
                 {/* {hasCancelButton && <button type="button" onClick={handleCancel}>cancel</button>} */}
             </form>
         </div>

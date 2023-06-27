@@ -3,5 +3,19 @@
     flex-direction: column;
     gap: 1.8rem;
     max-width: 840px;
-    padding: 6.3rem 0;
+    padding: 63px 10px;
+
+    @media screen and (max-width: 835px) {
+        padding: 198px 10px;
+        max-width: 594px;
+    }
+
+    @media screen and (max-width: 376px) {
+        padding: 30px 10px;
+        max-width: 343px;
+    }
+
+    @media screen and (max-width: 300px) {
+        padding: 30px 3px;
+    }
 }

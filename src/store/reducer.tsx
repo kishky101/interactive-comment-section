@@ -40,7 +40,7 @@ const sortWithBestComments = (comments: MockDataType[]) => {
 }
 
 const sortWithLatestComments = (comments: MockDataType[]) => {
-    return [...comments]
+    return [...comments].sort((a, b) => a.time - b.time)
 }
 
 export type CommentState = {

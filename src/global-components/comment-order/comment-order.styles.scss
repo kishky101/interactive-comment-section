@@ -26,12 +26,20 @@
         border: 1px solid var(--grey-grade1);
         border-radius: 1.2rem;
         cursor: pointer;
+        align-items: center;
         
 
         label {
             font-size: 1.4rem;
             color: var(--black-color);
             cursor: pointer;
+        }
+    }
+
+    & &__arrow {
+
+        &--show {
+            rotate: 180deg;
         }
     }
 
@@ -55,7 +63,6 @@
             display: block;
             white-space: nowrap;
             color: var(--black-color-grad);
-            //border: 1px solid red;
             cursor: pointer;
 
             &:first-of-type {
@@ -65,6 +72,30 @@
 
         input {
             appearance: none;
+        }
+    }
+
+    @media screen and (max-width: 835px) {
+        padding: 1.5rem 2.4rem;
+
+        & &__count {
+
+            span {
+                font-size: 1.4rem;
+            }
+        }
+
+        & &__dropdown {
+            padding: 1rem 2rem;
+    
+            label {
+                font-size: 1.2rem;
+            }
+        }
+
+        & &__arrow {
+            width: .8rem;
+            height: .8rem;
         }
     }
 }

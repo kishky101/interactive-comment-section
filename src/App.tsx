@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setCurrentUser('Laurel Fisher'))
+    dispatch(setCurrentUser('Ellie Alvaz'))
   })
 
   return(

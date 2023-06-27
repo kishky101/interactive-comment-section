@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ellieAlvaz from '../../assets/images/ellie-alvaz.png';
 import kyleethompson from '../../assets/images/kylee-thomson.png';
 import laurelfisher from '../../assets/images/laurel-fisher.png';
@@ -10,7 +10,7 @@ import { MockDataType } from "@/mock-comment-data";
 import { addNewComment, removeComment, editComment, setCommentLike } from "@/store/reducer";
 import { useAppDispatch } from "@/store/store";
 import FormInput from "../form-input/form-input.component";
-import { commentCreator } from "@/utils/utils";
+import { commentCreator, timeConverter } from "@/utils/utils";
 import { useSelector } from "react-redux";
 import { selectCurrentUser, selectLastId } from "@/store/selector";
 import { ActiveCommentType } from "../comments/comments.component";
@@ -23,10 +23,11 @@ type CommentProps = {
     replyComments?: MockDataType[];
     activeComment: ActiveCommentType;
     setActiveComment: (obj: ActiveCommentType) => void
+    padding?: string;
 }
 
-const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeComment, setActiveComment}) => {
-    const {id, name, comment, time, likeCount, liked} = comentObj;
+const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeComment, setActiveComment, padding}) => {
+    const {id, name, comment, time, timeIn, likeCount, liked} = comentObj;
     const dispatch = useAppDispatch();
 
     const lastId: number = useSelector(selectLastId);
@@ -34,8 +35,10 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
     const user = useSelector(selectCurrentUser);
 
     const [open, setOpen] = useState(false);
+    const [replypadding, setReplyPadding] = useState('2.4rem 3.2rem')
 
 
+    
     const isReplying = activeComment && activeComment.type === 'replying' && activeComment.id === comentObj.id;
     const isEditing = activeComment && activeComment.type === 'editing' && activeComment.id === comentObj.id;
    
@@ -49,6 +52,12 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
         setActiveComment({id: comentObj.id, type: 'replying'})
         toggleReplying()
     }
+
+    const toggleReplying = () => {
+        if (activeComment.type === 'replying') {
+            setActiveComment({id: comentObj.id, type: ''})
+        }
+    }
     
     const editHandler = () => setActiveComment({id: comentObj.id, type: 'editing'})
 
@@ -60,12 +69,6 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
         return text;
     }
 
-    const toggleReplying = () => {
-        if (activeComment.type === 'replying') {
-            setActiveComment({id: comentObj.id, type: ''})
-        }
-    }
-
     const updateComment = (text: string) => {
         dispatch(editComment({text, id}))
         setActiveComment({id: comentObj.id, type: ''})
@@ -73,21 +76,31 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
 
     const likeToggle = () => dispatch(setCommentLike(id));
 
+    useEffect(() => {
+
+        if (window.innerWidth < 300) {
+            setReplyPadding('1.6rem 1.6rem')
+            console.log(replypadding)
+        }else if (window.innerWidth < 835) {
+            setReplyPadding('1.6rem 2.4rem')
+            console.log(replypadding)
+        }
+    }, [window.innerWidth])
 
     return (
         <div>
-            {!isEditing && <div className="comment">
+            {!isEditing && <div className="comment" style={{padding: padding}}>
                 <div className="comment__image">
                     <img src={(name === 'Ellie Alvaz')? ellieAlvaz: (name === 'Kylee Thomson')? kyleethompson: laurelfisher}/>
                 </div>
                 <div className="comment__body">
                     <div className="comment__name">
                         <h5>{name} {name === user? '(You)': ''}</h5>
-                        <span>{time}</span>
+                        <span>{timeConverter(time)} {timeIn}</span>
                     </div>
-                    {<div className="comment__text">
+                    <div className="comment__text">
                         <p>{comment}</p>
-                    </div>}
+                    </div>
                     <div className="comment__footer">
                         <div onClick={likeToggle}>
                             <ReactionButton Icon={liked? FaHeart :FaRegHeart} text={likeCount} isLiked={liked} />
@@ -121,7 +134,7 @@ const Comment: React.FC<CommentProps> = ({comentObj, replyComments, activeCommen
                 {replyComments.map(comment => {
                     return (
                         <div key={comment.id}>
-                            <Comment comentObj={comment} activeComment={activeComment} setActiveComment={setActiveComment}/>
+                            <Comment comentObj={comment} activeComment={activeComment} setActiveComment={setActiveComment} padding={replypadding}/>
                         </div>
                     )
                 })}

@@ -1,8 +1,12 @@
 .icon {
     display: flex;
     gap: .8rem;
-    //color: var(--black-color-grad);
+    color: var(--black-color-grad);
     cursor: pointer;
+
+    &:hover {
+        color: var(--blue-color);
+    }
 
     & &__svg {
         font-size: 1.6rem;

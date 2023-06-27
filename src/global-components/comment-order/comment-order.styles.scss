@@ -28,6 +28,9 @@
         cursor: pointer;
         align-items: center;
         
+        &:hover {
+            border-color: var(--blue-color);
+        }
 
         label {
             font-size: 1.4rem;
@@ -64,6 +67,10 @@
             white-space: nowrap;
             color: var(--black-color-grad);
             cursor: pointer;
+
+            &:hover {
+                color: var(--blue-color);
+            }
 
             &:first-of-type {
                 margin-bottom: 1.8rem;

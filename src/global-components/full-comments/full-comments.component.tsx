@@ -15,7 +15,7 @@ const FullComments = () => {
     const dispatch = useAppDispatch();
 
     const lastId: number = useSelector(selectLastId);
-    console.log(lastId)
+ 
     const user = useSelector(selectCurrentUser);
 
     const addComment = (text: string, parentId?: number): void => {
